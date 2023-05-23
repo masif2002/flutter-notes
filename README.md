@@ -71,3 +71,19 @@ void subtract([a], b) {
 }
 ```
 * Positional arguments in square brackets become optional 
+____
+* You can use both, positional and named arguments as parameters in the same function
+
+### Types
+* Dart is a type-safe language (like TypeScript)
+* Like JS, the root type of a datatype is an 'Object'``
+
+```dart
+void add(int num1, int num2) {
+   num1 + num2 
+}
+```
+* Here, we've added the type for the arguments that the function must accept. Incase, any datatype other than integer is passed, then Dart will throw an error
+
+## Widgets
+* 'Container' is a type of widget that is commonly used for layout and styling
