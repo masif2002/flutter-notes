@@ -85,5 +85,69 @@ void add(int num1, int num2) {
 ```
 * Here, we've added the type for the arguments that the function must accept. Incase, any datatype other than integer is passed, then Dart will throw an error
 
+### Variables
+* You can create variables with the `var` keyword in Dart
+```dart
+var name = 'Mohamed Asif';
+var age; // cannot do
+```
+* Dart uses type inference, meaning that it dynamically assigns the type from the value it is assigned
+* But, when a variable is declared but not initialized, we must explicitly declare it with the type
+    ```dart
+    int age; // error 
+    ```
+    * But, if you specify the type you must assign the value. Instead, we can make the value of the variable optional
+    ```dart
+    int age = 21;
+    // OR
+    int age?;
+    ```
 ## Widgets
 * 'Container' is a type of widget that is commonly used for layout and styling
+
+## Creating a custom widget
+```dart
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(
+    MaterialApp(
+      home: Scaffold(
+        body: MyWidget(),
+      ),
+    ),
+  );
+}
+
+class MyWidget extends StatelessWidget {
+  @override
+  Widget build(context) {
+    return const Center(
+        child: Text(
+          'Hello World',
+          style: TextStyle(
+            fontSize: 48,
+          ),
+        ),
+      );
+  }
+}
+```
+* We create a new widget called _MyWidget_ that extends _StatelessWidget_
+* When extending _StatelessWidget_, we need to override the build method provided by _StatelessWidget_. When Flutter comes across our widget in the code while compiling the app, it builds the widget returned from the build() method
+* _context_ is a parameter provided by Flutter when it creates the widget
+* **Widget** is the return type of our _build_ method
+* Note that when we use our widget, we have the parantheses after the name of our widget. This is because we are actually invoking the constructor of our widget (inherited constructor in this case)
+
+### Adding custom constructor to our widget
+```dart
+class GradientContainer extends StatelessWidget {
+  const GradientContainer({myKey}): super(key: myKey);
+
+...
+```  
+* To _StatelessWidget_, we must pass a parameter called key. So we take in the named parameter that is automatically created by Flutter when we call our constructor of our custom widget, and pass it to our parent class, ie- _StatelessWidget_
+* The code can be reduced to even simpler form
+    ```dart
+    const GradientContainer({super.key});
+    ```
