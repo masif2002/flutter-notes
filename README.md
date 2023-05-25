@@ -102,6 +102,41 @@ var age; // cannot do
     // OR
     int age?;
     ```
+#### final & const
+* You can also create constant variables using `final` and `const` keywords
+```dart
+final val = fetchVal();
+const age = 20;
+```
+* The difference between both is that, `const` contains values that are constant at compile-time
+* Where as, `final` can be used to store values that are constant, but fetched at run-time 
+
+### Instance Variables
+```dart
+class StyledText extends StatelessWidget {
+  const StyledText(this.text, {super.key});
+
+  final String text;
+
+  @override
+  Widget build(context) {
+    return Text(
+      text,
+      style: TextStyle(
+        color: const Color.fromARGB(255, 255, 255, 255),
+        fontSize: size,
+      ),
+    );
+  }
+}
+```
+```dart
+...
+        child: StyledText('Hello World'),
+...
+```
+* Here, we accept a _text_ variable for our class as part of our constructor
+* `this.text` refers to the _text_ variable declared in the class, down below
 ## Widgets
 * 'Container' is a type of widget that is commonly used for layout and styling
 
@@ -146,8 +181,48 @@ class GradientContainer extends StatelessWidget {
 
 ...
 ```  
-* To _StatelessWidget_, we must pass a parameter called key. So we take in the named parameter that is automatically created by Flutter when we call our constructor of our custom widget, and pass it to our parent class, ie- _StatelessWidget_
+* To _StatelessWidget_, we must pass a parameter called `key`. So we take in the named argument that is automatically passed by Flutter when we call our constructor of our custom widget, and pass it to our parent class, ie- _StatelessWidget_
 * The code can be reduced to even simpler form
     ```dart
     const GradientContainer({super.key});
     ```
+
+### Adding multiple constructors
+```dart
+class GradientContainer extends StatelessWidget {
+  // Getting dynamic color values
+  const GradientContainer(this.gradientColors, {super.key});
+
+  // Using preset color values
+  GradientContainer.purple({super.key})
+      : gradientColors = [  
+          Colors.deepPurple,
+          Colors.deepPurpleAccent,
+        ];
+
+...
+```
+
+## Adding Images
+* It is good practice to place images under `assets/images` folder 
+* To add images, you need to register them in `pubspec.yaml` first
+```yaml
+flutter:
+
+  # ....
+
+  assets:
+    - assets/images/dice-1.png
+    - assets/images/dice-2.png
+```
+* After registering the images, you can use them with the Image class
+```dart
+...
+
+child: Image.asset(
+      'assets/images/dice-1.png',
+      width: 200,
+    ),
+
+...
+```
