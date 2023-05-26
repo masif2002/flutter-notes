@@ -3,17 +3,18 @@ Personalized learning notes for Flutter
 
 ## Extensions
 ```
-Flutter | A VsCode extension 
+Flutter | VsCode extension 
 ```
 
 ## Resources
 * [Material Design](https://m3.material.io/)
-
+* [Compilation in Dart](https://dart.dev/overview#:~:text=Dart's%20compiler%20technology%20lets%20you,compiler%20for%20producing%20machine%20code)
+* [Flutter Widget Catalog](https://docs.flutter.dev/ui/widgets)
 ## Commands
 ```
 flutter create proj_name
 ```
-* Initialise a flutter project
+* Initialize a flutter project
 ```
 flutter run 
 ```
@@ -76,7 +77,7 @@ ____
 
 ### Types
 * Dart is a type-safe language (like TypeScript)
-* Like JS, the root type of a datatype is an 'Object'``
+* Like JS, the root type of a datatype is an 'Object'
 
 ```dart
 void add(int num1, int num2) {
@@ -89,14 +90,14 @@ void add(int num1, int num2) {
 * You can create variables with the `var` keyword in Dart
 ```dart
 var name = 'Mohamed Asif';
-var age; // cannot do
+var age; // not recommended
 ```
 * Dart uses type inference, meaning that it dynamically assigns the type from the value it is assigned
-* But, when a variable is declared but not initialized, we must explicitly declare it with the type
+* But, when a variable is declared but not initialized, the variable automatically has a type `dynamic` assigned to it. Instead, we must explicitly declare the variable with the type
     ```dart
-    int age; // error 
+    int age;  
     ```
-    * But, if you specify the type you must assign the value. Instead, we can make the value of the variable optional
+* But, if you specify the type you must assign the value. Or else, we can make the value of the variable optional
     ```dart
     int age = 21;
     // OR
@@ -200,6 +201,11 @@ class GradientContainer extends StatelessWidget {
           Colors.deepPurpleAccent,
         ];
 
+...
+```
+```dart
+// Calling the constructor
+        body: GradientContainer.purple(),
 ...
 ```
 
