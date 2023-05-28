@@ -141,6 +141,53 @@ class StyledText extends StatelessWidget {
 ## Widgets
 * 'Container' is a type of widget that is commonly used for layout and styling
 
+### Column
+* The `Column` widget by default takes up the entire height of the screen
+* Even if you wrap the `Column` widget with the `Center` widget, the behaviour remains to be the same
+* You can change that by adding an extra property
+```dart 
+child: Center(
+  child: Column(
+    mainAxisSize: MainAxisSize.min,
+    children: [
+    
+  ...
+```
+* Since columns are vertical, _mainAxis_ in columns is the y-axis
+* By default, the value for _mainAxisSize_ is `MainAxisSize.max` 
+### Buttons
+* There are primarily three types of buttons available:  `ElevatedButton`, `OutlinedButton`, `TextButton`
+#### Styling Buttons
+```dart
+ ElevatedButton(
+  onPressed: () {},
+  style: ElevatedButton.styleFrom(
+    padding: const EdgeInsets.only(top: 50),
+  ),
+  child: const Text('data'),
+)
+```
+* This adds a 50px padding on top to the button
+* To add padding on all sides, `EdgeInsets.all()` can be used. Only to add padding on required sides `.only()` is used
+### SizedBox
+* This widget that can be used as a dummy widget to seperate two elements
+```dart
+...
+
+child: Column(
+  children: [
+    // Image.asset( ... )
+
+    const SizedBox(
+      height: 50,
+    ),
+    
+    // ElevatedButton( ... )
+),
+
+...
+```
+
 ## Creating a custom widget
 ```dart
 import 'package:flutter/material.dart';
