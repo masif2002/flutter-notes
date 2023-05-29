@@ -189,6 +189,7 @@ child: Column(
 ```
 
 ## Creating a custom widget
+### StatelessWidget
 ```dart
 import 'package:flutter/material.dart';
 
@@ -256,6 +257,51 @@ class GradientContainer extends StatelessWidget {
 ...
 ```
 
+### StatefulWidget
+* **_StatefulWidget_** is much like the _StatelessWidget_
+* Instead of one class that contains the `build()` method in _StatelessWidget_ we have 2 classes in _StatefulWidget_
+* One class that contains the `build()` method and another one that has `createState()` method that creates the state for the widget
+
+```dart
+// Actual Widget Class
+class Dice extends StatefulWidget {
+  // The actual widget remains const. But the constructor of _DiceState is not const (because it maintains the state which may change)
+  const Dice({super.key});
+
+  @override
+  State<Dice> createState() {
+    return _DiceState();
+  }
+}
+
+// Class that maintains the state of the widget
+class _DiceState extends State<Dice> {
+  var activeDiceImage = 'assets/images/dice-1.png';
+
+  void rollDice() {
+    setState(() {
+      activeDiceImage = 'assets/images/dice-5.png';
+    });
+  }
+
+  @override
+  Widget build(context) {
+    return Column(
+      children: [
+        Image.asset( activeDiceImage ),
+        ElevatedButton(
+          onPressed: rollDice,
+          child: const Text('Roll the Dice'),
+        )
+      ],
+    );
+  }
+}
+
+```
+* Here, `setState()` is the method that tells flutter to re-build the widget ie- to re-run the `build()` method (to update the changes)
+* Note that the _setState_ method accepts an _anonymous function_ (a function with no name) as an argument. 
+
 ## Adding Images
 * It is good practice to place images under `assets/images` folder 
 * To add images, you need to register them in `pubspec.yaml` first
@@ -279,3 +325,6 @@ child: Image.asset(
 
 ...
 ```
+
+## Questions
+1. Can you trigger updates to StatefulWidgets from outside the widget? 
