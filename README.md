@@ -30,6 +30,7 @@ flutter run
 * Dart uses Just-In-Time (JIT) compilation which helps us perform hot reload. 
 * Hot reload works by injecting updated source code files into the running Dart Virtual Machine (VM).
 > More on that, [here](https://dart.dev/overview#:~:text=Dart's%20compiler%20technology%20lets%20you,compiler%20for%20producing%20machine%20code)
+> Hot reload in `main()` does not happen for some reason. But works with the same widget imported from another custom widget
 
 ## main()
 * Like, C and C ++, dart calls the `main()` function by default. So, the application's workflow starts from the `main()` function
@@ -75,6 +76,32 @@ void subtract([a], b) {
 ____
 * You can use both, positional and named arguments as parameters in the same function
 
+### Receiving Arguments in Functions 
+```dart
+class Dummy extends StatelessWidget {
+  const Dummy(String name, {super.key});
+
+  ...
+```
+  * The constructor function defined above only receives the parameter _name_. It is not assigned to any variable inside the class, so it cannot be accessed anywhere in the widget. Hence, you need to receive arguments from a function as shown below
+```dart
+class Dummy extends StatelessWidget {
+  const Dummy(String name, {super.key}) : myName = name;
+
+  final String myName;
+
+  ...
+```
+  * Here, we create a variable `myName` and assign the parameter `name` to `myName`. So `myName` would be accessible anywhere inside the widget
+  * A shortcut for the same would be this:
+  ```dart
+  class Dummy extends StatelessWidget {
+    const Dummy(this.myName, {super.key});
+
+    final String myName;
+
+    ...
+  ```
 ### Types
 * Dart is a type-safe language (like TypeScript)
 * Like JS, the root type of a datatype is an 'Object'
@@ -103,6 +130,7 @@ var age; // not recommended
     // OR
     int age?;
     ```
+> Variables can store values of any type and not just limited to Strings and Integers
 #### final & const
 * You can also create constant variables using `final` and `const` keywords
 ```dart
@@ -140,6 +168,8 @@ class StyledText extends StatelessWidget {
 * `this.text` refers to the _text_ variable declared in the class, down below
 ## Widgets
 * 'Container' is a type of widget that is commonly used for layout and styling
+* 'Icon' to use Icons
+* You can wrap widgets with 'Opacity' widget to control the opacity. But has performance overhead, so not recommended
 
 ### Column
 * The `Column` widget by default takes up the entire height of the screen
@@ -302,6 +332,24 @@ class _DiceState extends State<Dice> {
 * Here, `setState()` is the method that tells flutter to re-build the widget ie- to re-run the `build()` method (to update the changes)
 * Note that the _setState_ method accepts an _anonymous function_ (a function with no name) as an argument. 
 
+### initState() in StatefulWidget
+* `initState()` lets you perform some initialization tasks once the object is created
+* So `initState()` runs only after the object is created and all the methods & variables in it have been declared
+```dart
+class _QuizState extends State<Quiz> {
+  // 1. Object Created 
+  Widget? activeScreen; // 2. Variable Declared
+
+  @override
+  void initState() {
+    // 3. initState() is executed
+
+    activeScreen = StartScreen(switchScreen);
+    super.initState();
+  }
+
+  ...
+```
 ## Adding Images
 * It is good practice to place images under `assets/images` folder 
 * To add images, you need to register them in `pubspec.yaml` first
@@ -327,4 +375,4 @@ child: Image.asset(
 ```
 
 ## Questions
-1. Can you trigger updates to StatefulWidgets from outside the widget? 
+1. ~~Can you trigger updates to StatefulWidgets from outside the widget?~~ 
