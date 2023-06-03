@@ -166,13 +166,25 @@ class StyledText extends StatelessWidget {
 ```
 * Here, we accept a _text_ variable for our class as part of our constructor
 * `this.text` refers to the _text_ variable declared in the class, down below
+
+### map()
+```dart
+anyList.map((item) => Text(item))
+```
+* You can use `map()` just like in JS. It returns a new list of all the elements
+* You can use the spread operator incase you need to have it as seprate elements instead of a new list
+  ```dart
+  ...anyList.map((item) => Text(item))
+  ```
 ## Widgets
-* 'Container' is a type of widget that is commonly used for layout and styling
 * 'Icon' to use Icons
 * You can wrap widgets with 'Opacity' widget to control the opacity. But has performance overhead, so not recommended
-
+### Container
+* _Container_ is a type of widget that is commonly used for layout and styling
+* Containers with no children try to be as big as possible unless the incoming constraints are unbounded, in which case they try to be as small as possible.
 ### Column
 * The `Column` widget by default takes up the entire height of the screen
+* The width of the Column is the maximum width of the children 
 * Even if you wrap the `Column` widget with the `Center` widget, the behaviour remains to be the same
 * You can change that by adding an extra property
 ```dart 
@@ -374,5 +386,9 @@ child: Image.asset(
 ...
 ```
 
+## Other Notes
+* Using `double.infinity` gives you an infinite value that you can use for dimension of an element to take up the maximum size 
+
 ## Questions
 1. ~~Can you trigger updates to StatefulWidgets from outside the widget?~~ 
+1. How do you access arguments received from the constructor in build method for Stateful Widgets  
