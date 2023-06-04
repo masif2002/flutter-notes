@@ -10,6 +10,7 @@ Flutter | VsCode extension
 * [Material Design](https://m3.material.io/)
 * [Compilation in Dart](https://dart.dev/overview#:~:text=Dart's%20compiler%20technology%20lets%20you,compiler%20for%20producing%20machine%20code)
 * [Flutter Widget Catalog](https://docs.flutter.dev/ui/widgets)
+* [Google Fonts](https://pub.dev/packages/google_fonts/install)
 ## Commands
 ```
 flutter create proj_name
@@ -134,11 +135,23 @@ var age; // not recommended
 #### final & const
 * You can also create constant variables using `final` and `const` keywords
 ```dart
-final val = fetchVal();
 const age = 20;
+final val = getMyAge();
 ```
 * The difference between both is that, `const` contains values that are constant at compile-time
-* Where as, `final` can be used to store values that are constant, but fetched at run-time 
+* Where as, `final` can be used to store values that are constant, but picked up at run-time 
+* Variables that are declared with `final` and `const` can't be re-assigned values obviously
+  ```dart
+  const String name = 'Asif';
+  name = 'YourName' // error
+  ```
+  * Even though these variables can't be reassigned, they can be mutated in memory (with the help of methods provided by Dart)
+    ```dart
+    const List<String> names = []
+    names.add('Asif') // Works
+
+    names = ['Asif'] // Error
+    ```
 
 ### Instance Variables
 ```dart
@@ -362,6 +375,34 @@ class _QuizState extends State<Quiz> {
 
   ...
 ```
+
+### Accessing constructor arguments in build() method in StatefulWidgets
+* The methods and objects received in the constructor of a Stateful Widget can be accessed via the `widget` object 
+* `widget.<obj_name>` gives access to the object
+```dart
+class QuestionScreen extends StatefulWidget {
+  const QuestionScreen({super.key, required this.selectAnswer});
+
+  final void Function(String answer) selectAnswer;
+
+  @override
+  State<QuestionScreen> createState() {
+    return _QuestionScreenState();
+  }
+}
+
+class _QuestionScreenState extends State<QuestionScreen> {
+
+  void nextQuestion(String answer) {
+    widget.selectAnswer(answer);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    ...
+```
+* Here, a function named `selectAnswer()` is received from the constructor
+* That function is accessed as `widget.selectAnswer()` in the state class below
 ## Adding Images
 * It is good practice to place images under `assets/images` folder 
 * To add images, you need to register them in `pubspec.yaml` first
@@ -386,6 +427,30 @@ child: Image.asset(
 ...
 ```
 
+## Custom Font
+* You can add custom font either by downloading a custom font file (.ttf) or using the **google_fonts** package
+```dart
+// Before
+Text(
+  'My Text',
+  style: TextStyle(
+    fontSize: 24,
+    fontWeight: FontWeight.bold,
+  ),
+```
+```dart
+// After
+import 'package:google_fonts/google_fonts.dart';
+
+...
+
+Text(
+  'My Text',
+  style: GoogleFonts.poppins(
+    fontSize: 24,
+    fontWeight: FontWeight.bold,
+  ),
+```
 ## Other Notes
 * Using `double.infinity` gives you an infinite value that you can use for dimension of an element to take up the maximum size 
 
