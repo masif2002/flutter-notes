@@ -179,10 +179,19 @@ class StyledText extends StatelessWidget {
 ```
 * Here, we accept a _text_ variable for our class as part of our constructor
 * `this.text` refers to the _text_ variable declared in the class, down below
-
+### List
+```dart
+final List<String> anyList = [];
+```
+* You need to specify the type of elements that is going to be stored in the list inside angle brackets
+* NEVER MAKE A COPY OF LIST LIKE THIS
+  ```dart
+  newList = oldList
+  ```
+  * The above code actually creates a pointer to the old list. So both the variables point to the old list.
 ### map()
 ```dart
-anyList.map((item) => Text(item))
+anyList.map((item) => Text(item));
 ```
 * You can use `map()` just like in JS. It returns a new list of all the elements
 * You can use the spread operator incase you need to have it as seprate elements instead of a new list
