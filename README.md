@@ -198,6 +198,20 @@ anyList.map((item) => Text(item));
   ```dart
   ...anyList.map((item) => Text(item))
   ```
+
+### Map data-type in Dart
+* Map is like a Dictionary in python with key value pairs
+```dart
+var myself = {
+  'name': 'Asif',
+  'age': 21,
+};
+``` 
+* Here, the data type of the variable is `Map<String, Object>`
+* The value of an item in a dictionary can be accessed as follows
+  ```dart
+  print(myself['name']) // 'Asif'
+  ```
 ## Widgets
 * 'Icon' to use Icons
 * You can wrap widgets with 'Opacity' widget to control the opacity. But has performance overhead, so not recommended
@@ -460,6 +474,21 @@ Text(
     fontWeight: FontWeight.bold,
   ),
 ```
+## Icons
+* You can use icons with the standalone `Icon` class or use the `.icon()` constructor if you are using it with a button
+```dart
+// Reset Button
+TextButton.icon(
+  style: TextButton.styleFrom(
+    foregroundColor: Colors.white,
+  ),
+  icon: const Icon(
+    Icons.replay,
+  ),
+  onPressed: restartQuiz,
+  label: const Text('Reset Quiz'),
+)
+``` 
 ## Other Notes
 * Using `double.infinity` gives you an infinite value that you can use for dimension of an element to take up the maximum size 
 
