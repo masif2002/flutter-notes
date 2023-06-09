@@ -198,6 +198,8 @@ anyList.map((item) => Text(item));
   ```dart
   ...anyList.map((item) => Text(item))
   ```
+* The `map()` function returns an `Iterable` which you also can convert it to a list with `.toList()` function
+
 
 ### Map data-type in Dart
 * Map is like a Dictionary in python with key value pairs
@@ -211,6 +213,39 @@ var myself = {
 * The value of an item in a dictionary can be accessed as follows
   ```dart
   print(myself['name']) // 'Asif'
+  ```
+### Type Casting
+* You can type cast in Dart from one data type to another like this using the `as` keyword
+```dart
+String as int
+```
+### Getter Function
+* A getter function is a regular function that returns a value. This function is treated like it's a variable
+* In Dart, you can create a getter function with the `get` keyword
+```dart
+// Regular Function
+List<String> shuffledAnswers() {
+  var ans = List.of(answers);
+  ans.shuffle();
+  return ans;
+}
+```
+```dart
+// Getter Function
+List<String> get shuffledAnswers {
+  var ans = List.of(answers);
+  ans.shuffle();
+  return ans;
+}
+```
+* Notice that the parantheses have disappeared
+* This function is now treated as a variable (but still as a function internally)
+  ```dart
+  // Regular function
+  print(shuffledAnswers())
+
+  // getter function
+  print(shuffledAnswers)
   ```
 ## Widgets
 * 'Icon' to use Icons
@@ -233,6 +268,24 @@ child: Center(
 ```
 * Since columns are vertical, _mainAxis_ in columns is the y-axis
 * By default, the value for _mainAxisSize_ is `MainAxisSize.max` 
+### Expanded
+* By default, the main (vertical) axis of the column takes up the entire space of the screen and the size of the cross (horizontal) axis is infinity. The size of the cross axis is not size of the screen, but of infinite width
+* Similarly, it is the same case with the Row widget
+* When you combine Row widget and Column widget, you get this problem of pixels breaking out of the screen
+* Using `Expanded` widget solves the problem in this case
+```dart
+Row(
+  children: [
+    Expanded(
+      Column(
+        ....
+      )
+    )
+  ] 
+)
+```
+* Here, the `Column` widget takes up infinite space on the X axis (cross axis) by default. So, the `Expanded` widget tells that, it needs to expand only to the width of the parent widget which is the `Row` widget. As you know the X axis of the row widget takes up only the space available within the screen
+* This solves the problem of pixels breaking out of the screen
 ### Buttons
 * There are primarily three types of buttons available:  `ElevatedButton`, `OutlinedButton`, `TextButton`
 #### Styling Buttons
@@ -265,7 +318,16 @@ child: Column(
 
 ...
 ```
-
+### SingleChildScrollView
+```dart
+ SizedBox(
+  height: 300,
+  child: SingleChildScrollView(
+    child: Column(
+      children: [
+        ...
+```
+* The `SingleChildScrollView` must be wrapped by a widget like `SizedBox`. When content breaks out of the _SizedBox_, it becomes scrollable
 ## Creating a custom widget
 ### StatelessWidget
 ```dart
