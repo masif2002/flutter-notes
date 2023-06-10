@@ -328,6 +328,27 @@ child: Column(
         ...
 ```
 * The `SingleChildScrollView` must be wrapped by a widget like `SizedBox`. When content breaks out of the _SizedBox_, it becomes scrollable
+
+### RichText
+* `RichText` allows you to create inline-styles for every piece of text. It is like applying styles to `<span>` in HTML
+```dart
+RichText(
+  text: TextSpan(
+    style: GoogleFonts.poppins( // Usually TextStyle() instead of GoogleFonts()
+      fontSize: 23,
+      color: const Color(0xFF75E6DA),
+    ),
+    children: const <TextSpan>[ // List<TextSpan>
+      TextSpan(text: "Hello "),
+      TextSpan(
+          text: "World",
+          style: TextStyle(color: Colors.blue)),
+    ],
+  ),
+),
+```
+* Here, you create a global style first, which is applied to all its children by default
+* Then you add pieces of text, where you want to style seperately.
 ## Creating a custom widget
 ### StatelessWidget
 ```dart
